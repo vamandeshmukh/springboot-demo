@@ -27,8 +27,6 @@ public class EmployeeService {
 
 	public Employee getEmpById(int employeeId) {
 		LOG.info("EmployeeService getEmpById");
-		LOG.warn("EmployeeService getEmpById");
-		LOG.error("EmployeeService getEmpById");
 //		Employee emp = get data from DB using repository
 		Employee emp = empList.stream().filter(e -> employeeId == e.getEmployeeId()).findAny().orElse(null);
 		if (null == emp)
@@ -40,6 +38,8 @@ public class EmployeeService {
 
 	public List<Employee> getAllEmps() {
 		LOG.info("EmployeeService getAllEmps");
+		LOG.warn("EmployeeService getAllEmps");
+		LOG.error("EmployeeService getAllEmps");
 		return empList;
 	}
 

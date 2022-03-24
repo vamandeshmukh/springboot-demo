@@ -10,6 +10,7 @@ import com.capgemini.springboot.demo.model.Employee;
 @RestController
 public class EmployeeController {
 
+//	http://localhost:8088/get-employee-by-id
 	@GetMapping("/get-employee-by-id")
 	public Employee getEmployeeById() {
 		Employee emp = new Employee(101, "Sonu", 50000);
@@ -17,6 +18,7 @@ public class EmployeeController {
 		return emp;
 	}
 
+//	http://localhost:8088/get-all-employees
 	@GetMapping("/get-all-employees")
 	public List<Employee> getAllEmployees() {
 		System.out.println("get-all-employees");

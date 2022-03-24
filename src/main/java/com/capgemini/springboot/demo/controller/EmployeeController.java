@@ -1,6 +1,7 @@
 package com.capgemini.springboot.demo.controller;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +13,14 @@ import com.capgemini.springboot.demo.service.EmployeeService;
 @RestController
 public class EmployeeController {
 
-//	EmployeeService service = new EmployeeService();
 	@Autowired
 	private EmployeeService service;
 
 //	http://localhost:8088/get-employee-by-id
 	@GetMapping("/get-employee-by-id")
 	public Employee getEmployeeById() {
-		int employeeId = 101; //102, 103, ... 
-		System.out.println("EmployeeController getEmployeeById");
+		int employeeId = new Random().nextInt(6) + 100;
+		System.out.println("EmployeeController getEmployeeById " + employeeId);
 		return service.getEmpById(employeeId);
 	}
 
@@ -28,7 +28,7 @@ public class EmployeeController {
 	@GetMapping("/get-all-employees")
 	public List<Employee> getAllEmployees() {
 		System.out.println("get-all-employees");
-		return null;
+		return service.getAllEmps();
 	}
 
 //  public Employee addEmployee() {

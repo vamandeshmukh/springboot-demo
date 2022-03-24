@@ -24,12 +24,39 @@ public class EmployeeService {
 	public Employee getEmpById(int employeeId) {
 		System.out.println("EmployeeService getEmpById");
 //		Employee emp = get data from DB using repository
-		Employee emp = null;
+		Employee emp = empList.stream().filter(e -> employeeId == e.getEmployeeId()).findAny().orElse(null);
+		if (null == emp)
+			System.out.println("Employee with the id " + employeeId + " not found!");
+		else
+			System.out.println(emp.toString());
 		return emp;
 	}
 
 	public List<Employee> getAllEmps() {
 		System.out.println("EmployeeService getEmpById");
 		return empList;
+	}
+
+	public Employee addEmp(Employee employee) {
+		empList.add(employee);
+		return employee;
+	}
+
+	public Employee updateEmp(Employee employee) {
+		empList.forEach(e -> {
+			if (e.getEmployeeId() == employee.getEmployeeId())
+				empList.set(empList.indexOf(e), employee);
+		});
+		return employee;
+	}
+
+	public Employee deleteEmp(int employeeId) {
+		Employee emp = this.getEmpById(employeeId);
+		empList.forEach(e -> {
+			if (e.getEmployeeId() == employeeId) {
+				empList.remove(e);
+			}
+		});
+		return emp;
 	}
 }

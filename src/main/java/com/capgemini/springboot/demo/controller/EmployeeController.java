@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.springboot.demo.model.Employee;
@@ -31,9 +32,11 @@ public class EmployeeController {
 		return service.getAllEmps();
 	}
 
-//  public Employee addEmployee() {
-//		return null;
-//	}
+	@PostMapping("/add-employee")
+	public Employee addEmployee() {
+		Employee employee = new Employee();
+		return service.addEmp(employee);
+	}
 
 //	public Employee updateEmployee() {
 //	return null;

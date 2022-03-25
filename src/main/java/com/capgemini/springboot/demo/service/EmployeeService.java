@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.capgemini.springboot.demo.model.Employee;
 
 @Service
-public class EmployeeService {
+public class EmployeeService implements IEmployeeService {
 
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 

@@ -15,3 +15,6 @@
 2022-03-25 12:36:44.302  INFO 12560 --- [http-nio-8088-exec-3] c.c.s.d.controller.EmployeeController    : EmployeeController getEmployeeById 101
 2022-03-25 12:36:44.304  INFO 12560 --- [http-nio-8088-exec-3] c.c.s.demo.service.EmployeeService       : EmployeeService getEmpById
 2022-03-25 12:36:44.307  INFO 12560 --- [http-nio-8088-exec-3] c.c.s.demo.service.EmployeeService       : Employee [employeeId=101, firstName=Sonu, salary=50000.0]
+2022-03-25 12:53:10.376  INFO 12560 --- [http-nio-8088-exec-6] c.c.s.d.controller.EmployeeController    : EmployeeController getEmployeeById 101
+2022-03-25 12:53:10.377  INFO 12560 --- [http-nio-8088-exec-6] c.c.s.demo.service.EmployeeService       : EmployeeService getEmpById
+2022-03-25 12:53:10.378  INFO 12560 --- [http-nio-8088-exec-6] c.c.s.demo.service.EmployeeService       : Employee [employeeId=101, firstName=Sonu, salary=50000.0]

@@ -1,0 +1,17 @@
+2022-03-25 12:36:21.009  INFO 12560 --- [main] c.c.s.demo.SpringbootDemoApplication     : Starting SpringbootDemoApplication using Java 11.0.2 on DESKTOP-KFP7J4E with PID 12560 (C:\VamanCode\00_STS_WS\springboot-demo\target\classes started by Vaman in C:\VamanCode\00_STS_WS\springboot-demo)
+2022-03-25 12:36:21.014  INFO 12560 --- [main] c.c.s.demo.SpringbootDemoApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-03-25 12:36:24.259  INFO 12560 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2022-03-25 12:36:24.288  INFO 12560 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-03-25 12:36:24.291  INFO 12560 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.58]
+2022-03-25 12:36:24.588  INFO 12560 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-03-25 12:36:24.599  INFO 12560 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3291 ms
+2022-03-25 12:36:25.929  INFO 12560 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2022-03-25 12:36:25.956  INFO 12560 --- [main] c.c.s.demo.SpringbootDemoApplication     : Started SpringbootDemoApplication in 6.414 seconds (JVM running for 10.087)
+2022-03-25 12:36:25.964  INFO 12560 --- [main] c.c.s.demo.SpringbootDemoApplication     : End
+2022-03-25 12:36:32.819  INFO 12560 --- [http-nio-8088-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-25 12:36:32.821  INFO 12560 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-03-25 12:36:32.826  INFO 12560 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2022-03-25 12:36:32.938  INFO 12560 --- [http-nio-8088-exec-1] c.c.springboot.demo.controller.Hello     : Hello
+2022-03-25 12:36:44.302  INFO 12560 --- [http-nio-8088-exec-3] c.c.s.d.controller.EmployeeController    : EmployeeController getEmployeeById 101
+2022-03-25 12:36:44.304  INFO 12560 --- [http-nio-8088-exec-3] c.c.s.demo.service.EmployeeService       : EmployeeService getEmpById
+2022-03-25 12:36:44.307  INFO 12560 --- [http-nio-8088-exec-3] c.c.s.demo.service.EmployeeService       : Employee [employeeId=101, firstName=Sonu, salary=50000.0]

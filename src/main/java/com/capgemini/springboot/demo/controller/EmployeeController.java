@@ -1,7 +1,6 @@
 package com.capgemini.springboot.demo.controller;
 
 import java.util.List;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +24,9 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService service;
 
-//	http://localhost:8088/get-employee-by-id/102
+//	http://localhost:8088/get-employee-by-id/{eid}
 	@GetMapping("/get-employee-by-id/{eid}")
 	public Employee getEmployeeById(@PathVariable(name = "eid") int employeeId) {
-//		int employeeId = new Random().nextInt(6) + 100;
 		LOG.info("EmployeeController getEmployeeById " + employeeId);
 		return service.getEmpById(employeeId);
 	}
@@ -47,14 +45,18 @@ public class EmployeeController {
 		return service.addEmp(employee);
 	}
 
+//	http://localhost:8088/update-employee 
 	@PutMapping("/update-employee")
-	public Employee updateEmployee() {
-		return null;
+	public Employee updateEmployee(@RequestBody Employee employee) {
+		LOG.info(employee.toString());
+		return service.updateEmp(employee);
 	}
 
-	@DeleteMapping("/delete-employee")
-	public Employee deleteEmployee() {
-		return null;
+//	http://localhost:8088/delete-employee/{eid} 
+	@DeleteMapping("/delete-employee/{eid}")
+	public Employee deleteEmployee(@PathVariable(name = "eid") int employeeId) {
+		LOG.info(Integer.toString(employeeId));
+		return service.deleteEmp(employeeId);
 	}
 
 }

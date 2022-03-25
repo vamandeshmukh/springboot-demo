@@ -71,16 +71,24 @@ public class EmployeeController {
 
 //	http://localhost:8088/update-employee 
 	@PutMapping("/update-employee")
-	public Employee updateEmployee(@RequestBody Employee employee) {
+	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
 		LOG.info(employee.toString());
-		return service.updateEmp(employee);
+		Employee emp = service.updateEmp(employee);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", "Employee " + emp.getEmployeeId() + " was updated successfully.");
+		ResponseEntity<Employee> response = new ResponseEntity<>(emp, headers, HttpStatus.OK);
+		return response;
 	}
 
 //	http://localhost:8088/delete-employee/{eid} 
 	@DeleteMapping("/delete-employee/{eid}")
-	public Employee deleteEmployee(@PathVariable(name = "eid") int employeeId) {
+	public ResponseEntity<Employee> deleteEmployee(@PathVariable(name = "eid") int employeeId) {
 		LOG.info(Integer.toString(employeeId));
-		return service.deleteEmp(employeeId);
+		Employee emp = service.deleteEmp(employeeId);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", "Employee " + employeeId + " was deleted successfully.");
+		ResponseEntity<Employee> response = new ResponseEntity<>(emp, headers, HttpStatus.OK);
+		return response;
 	}
 
 }

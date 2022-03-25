@@ -49,16 +49,24 @@ public class EmployeeController {
 
 	// http://localhost:8088/get-all-employees
 	@GetMapping("/get-all-employees")
-	public List<Employee> getAllEmployees() {
+	public ResponseEntity<List<Employee>> getAllEmployees() {
 		LOG.info("get-all-employees");
-		return service.getAllEmps();
+		List<Employee> empList = service.getAllEmps();
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", "Employees were found successfully.");
+		ResponseEntity<List<Employee>> response = new ResponseEntity<>(empList, headers, HttpStatus.OK);
+		return response;
 	}
 
 //	http://localhost:8088/add-employee 
 	@PostMapping("/add-employee")
-	public Employee addEmployee(@RequestBody Employee employee) {
+	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
 		LOG.info(employee.toString());
-		return service.addEmp(employee);
+		Employee emp = service.addEmp(employee);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", "Employee " + emp.getEmployeeId() + " was created successfully.");
+		ResponseEntity<Employee> response = new ResponseEntity<>(emp, headers, HttpStatus.CREATED);
+		return response;
 	}
 
 //	http://localhost:8088/update-employee 

@@ -22,7 +22,7 @@ import com.capgemini.springboot.demo.service.EmployeeService;
 
 @RestController
 @RequestMapping("/emp")
-public class EmployeeController {
+public class EmployeeController implements IEmployeeController {
 
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 

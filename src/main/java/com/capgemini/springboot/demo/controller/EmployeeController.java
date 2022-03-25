@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.springboot.demo.model.Employee;
 import com.capgemini.springboot.demo.service.EmployeeService;
 
 @RestController
+@RequestMapping("/emp")
 public class EmployeeController {
 
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
@@ -27,7 +29,7 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService service;
 
-////	http://localhost:8088/get-employee-by-id/{eid}
+////	http://localhost:8088/emp/get-employee-by-id/{eid}
 //	@GetMapping("/get-employee-by-id/{eid}")
 //	public ResponseEntity<Employee> getEmployeeById(@PathVariable(name = "eid") int employeeId) {
 //		LOG.info("EmployeeController getEmployeeById " + employeeId);
@@ -36,7 +38,7 @@ public class EmployeeController {
 //		return response;
 //	}
 
-//	http://localhost:8088/get-employee-by-id/{eid}
+//	http://localhost:8088/emp/get-employee-by-id/{eid}
 	@GetMapping("/get-employee-by-id/{eid}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable(name = "eid") int employeeId) {
 		LOG.info("EmployeeController getEmployeeById " + employeeId);
@@ -47,7 +49,7 @@ public class EmployeeController {
 		return response;
 	}
 
-	// http://localhost:8088/get-all-employees
+	// http://localhost:8088/emp/get-all-employees
 	@GetMapping("/get-all-employees")
 	public ResponseEntity<List<Employee>> getAllEmployees() {
 		LOG.info("get-all-employees");
@@ -58,7 +60,7 @@ public class EmployeeController {
 		return response;
 	}
 
-//	http://localhost:8088/add-employee 
+//	http://localhost:8088/emp/add-employee 
 	@PostMapping("/add-employee")
 	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
 		LOG.info(employee.toString());
@@ -69,7 +71,7 @@ public class EmployeeController {
 		return response;
 	}
 
-//	http://localhost:8088/update-employee 
+//	http://localhost:8088/emp/update-employee 
 	@PutMapping("/update-employee")
 	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
 		LOG.info(employee.toString());
@@ -80,7 +82,7 @@ public class EmployeeController {
 		return response;
 	}
 
-//	http://localhost:8088/delete-employee/{eid} 
+//	http://localhost:8088/emp/delete-employee/{eid} 
 	@DeleteMapping("/delete-employee/{eid}")
 	public ResponseEntity<Employee> deleteEmployee(@PathVariable(name = "eid") int employeeId) {
 		LOG.info(Integer.toString(employeeId));

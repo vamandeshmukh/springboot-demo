@@ -40,6 +40,17 @@ public class EmployeeController implements IEmployeeController {
 		return response;
 	}
 
+//	http://localhost:8088/emp/get-employee-by-id/{eid}
+	@GetMapping("/get-employees-by-firstname/{firstName}")
+	public ResponseEntity<List<Employee>> getEmployeeByFirstName(@PathVariable(name = "firstName") String firstName) {
+		LOG.info("getEmployeeByfirstName " + firstName);
+		List<Employee> empList = service.getEmpsByFirstName(firstName);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", "Employees found successfully.");
+		ResponseEntity<List<Employee>> response = new ResponseEntity<>(empList, headers, HttpStatus.OK);
+		return response;
+	}
+
 	// http://localhost:8088/emp/get-all-employees
 	@GetMapping("/get-all-employees")
 	public ResponseEntity<List<Employee>> getAllEmployees() {

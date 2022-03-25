@@ -29,7 +29,7 @@ public class EmployeeService implements IEmployeeService {
 			throw new EmployeeNotFoundException("Employee with employeeId " + employeeId + " not found");
 	}
 
-	public List<Employee> getEmpByFirstName(String firstName) {
+	public List<Employee> getEmpsByFirstName(String firstName) {
 		LOG.info("getEmpByFirstName " + firstName);
 		List<Employee> empList = employeeRepository.findByFirstName(firstName);
 		if (empList.isEmpty())

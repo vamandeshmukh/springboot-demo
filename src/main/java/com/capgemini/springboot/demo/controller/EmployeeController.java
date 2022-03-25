@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,10 +25,10 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService service;
 
-//	http://localhost:8088/get-employee-by-id
-	@GetMapping("/get-employee-by-id")
-	public Employee getEmployeeById() {
-		int employeeId = new Random().nextInt(6) + 100;
+//	http://localhost:8088/get-employee-by-id/102
+	@GetMapping("/get-employee-by-id/{eid}")
+	public Employee getEmployeeById(@PathVariable(name = "eid") int employeeId) {
+//		int employeeId = new Random().nextInt(6) + 100;
 		LOG.info("EmployeeController getEmployeeById " + employeeId);
 		return service.getEmpById(employeeId);
 	}

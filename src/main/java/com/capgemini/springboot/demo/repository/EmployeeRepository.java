@@ -10,6 +10,6 @@ import com.capgemini.springboot.demo.model.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-//	public abstract List<Employee> findByFirstName(String firstName);
+	public abstract List<Employee> findByFirstName(String firstName);
 
 }

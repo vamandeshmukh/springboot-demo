@@ -9,20 +9,18 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.capgemini.springboot.demo.model.Employee;
-
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
-	// exception handling code
-
 	@ExceptionHandler(EmployeeNotFoundException.class)
-	public ResponseEntity<Object> handleEmployeeNotFoundException() {
-		LOG.info("handleEmployeeNotFoundException");
+	public ResponseEntity<Object> handleEmployeeNotFoundException(EmployeeNotFoundException e) {
+		String exceptionMessage = e.getMessage();
+		LOG.info(exceptionMessage);
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("message", "Employee not found!");
+		headers.add("message", exceptionMessage);
 		return new ResponseEntity<Object>(null, headers, HttpStatus.NOT_FOUND);
 	}
+
 }

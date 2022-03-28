@@ -250,3 +250,11 @@ public class EmployeeController implements IEmployeeController {
 ////}
 //
 //}
+
+
+
+
+
+
+
+//curl -X "GET" "http://localhost:8088/emp/get-all-employees"

@@ -1,5 +1,6 @@
 package com.capgemini.springboot.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,10 +13,13 @@ public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "employee_id")
 	private int employeeId;
 
+	@Column(name = "first_name")
 	private String firstName;
-	
+
+	@Column(name = "salary")
 	private double salary;
 
 	public Employee() {

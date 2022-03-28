@@ -30,7 +30,7 @@ public class EmployeeController implements IEmployeeController {
 	private EmployeeService service;
 
 //	http://localhost:8088/emp/get-employee-by-id/{eid}
-	@GetMapping("/get-employee-by-id/{eid}")
+	@GetMapping("/get-employee-by-id/{eid}") // 101 
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable(name = "eid") int employeeId) {
 		LOG.info("getEmployeeById " + employeeId);
 		Employee emp = service.getEmpById(employeeId);

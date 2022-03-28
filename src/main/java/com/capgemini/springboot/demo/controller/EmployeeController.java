@@ -30,9 +30,9 @@ public class EmployeeController implements IEmployeeController {
 	private EmployeeService service;
 
 //	http://localhost:8088/emp/get-employee-by-id/{eid}
-	@GetMapping("/get-employee-by-id/{eid}") // 101 
+	@GetMapping("/get-employee-by-id/{eid}") // 101
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable(name = "eid") int employeeId) {
-		LOG.info("getEmployeeById " + employeeId);
+		LOG.info(Integer.toString(employeeId));
 		Employee emp = service.getEmpById(employeeId);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("message", "Employee " + employeeId + " was found successfully.");
@@ -43,7 +43,7 @@ public class EmployeeController implements IEmployeeController {
 //	http://localhost:8088/emp/get-employee-by-id/{eid}
 	@GetMapping("/get-employees-by-firstname/{firstName}")
 	public ResponseEntity<List<Employee>> getEmployeeByFirstName(@PathVariable(name = "firstName") String firstName) {
-		LOG.info("getEmployeeByfirstName " + firstName);
+		LOG.info(firstName);
 		List<Employee> empList = service.getEmpsByFirstName(firstName);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("message", "Employees found successfully.");
@@ -94,7 +94,6 @@ public class EmployeeController implements IEmployeeController {
 		ResponseEntity<Employee> response = new ResponseEntity<>(emp, headers, HttpStatus.OK);
 		return response;
 	}
-
 }
 
 //package com.capgemini.springboot.demo.controller;
@@ -250,11 +249,5 @@ public class EmployeeController implements IEmployeeController {
 ////}
 //
 //}
-
-
-
-
-
-
 
 //curl -X "GET" "http://localhost:8088/emp/get-all-employees"

@@ -23,4 +23,12 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<Object>(null, headers, HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler(DepartmentNotFoundException.class)
+	public ResponseEntity<Object> handleDepartmentNotFoundException(DepartmentNotFoundException e) {
+		String exceptionMessage = e.getMessage();
+		LOG.info(exceptionMessage);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", exceptionMessage);
+		return new ResponseEntity<Object>(null, headers, HttpStatus.NOT_FOUND);
+	}
 }

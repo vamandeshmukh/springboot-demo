@@ -25,6 +25,8 @@ public class EmployeeService implements IEmployeeService {
 	@Autowired
 	DepartmentRepository departmentRepository;
 
+
+	@Override
 	public Employee getEmpById(int employeeId) {
 		LOG.info("getEmpById " + employeeId);
 		Optional<Employee> empOptional = employeeRepository.findById(employeeId);
@@ -37,6 +39,7 @@ public class EmployeeService implements IEmployeeService {
 		}
 	}
 
+	@Override
 	public List<Employee> getEmpsByFirstName(String firstName) {
 		LOG.info("getEmpByFirstName " + firstName);
 		List<Employee> empList = employeeRepository.findByFirstName(firstName);
@@ -49,13 +52,19 @@ public class EmployeeService implements IEmployeeService {
 		}
 	}
 
+	@Override
 	public List<Employee> getAllEmps() {
 		LOG.info("getAllEmps");
 		return employeeRepository.findAll();
 	}
 
+	@Override
 	public Employee addEmp(Employee employee) {
 		LOG.info(employee.toString());
+		
+//		if ( departmentRepository.findById(employee.getDepartment().getDepartmentId()) != null )
+//			if ( departmentRepository.findById(employee.getDepartment().getDepartmentId()).isPresent() )
+		
 		if (employee.getDepartment() == null
 				|| departmentRepository.findById(employee.getDepartment().getDepartmentId()).isPresent()) {
 			return employeeRepository.save(employee);
@@ -67,6 +76,7 @@ public class EmployeeService implements IEmployeeService {
 		}
 	}
 
+	@Override
 	public Employee updateEmp(Employee employee) {
 		LOG.info(employee.toString());
 		Optional<Employee> empOptional = employeeRepository.findById(employee.getEmployeeId());
@@ -87,6 +97,7 @@ public class EmployeeService implements IEmployeeService {
 		}
 	}
 
+	@Override
 	public Employee deleteEmp(int employeeId) {
 		LOG.info(Integer.toString(employeeId));
 		Optional<Employee> empOptional = employeeRepository.findById(employeeId);

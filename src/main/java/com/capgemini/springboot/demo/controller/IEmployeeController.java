@@ -18,4 +18,6 @@ public interface IEmployeeController {
 
 	public abstract ResponseEntity<Employee> deleteEmployee(int employeeId);
 
+	public abstract ResponseEntity<List<Employee>> getEmployeeByFirstName(String firstName);
+
 }

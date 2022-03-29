@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.springboot.demo.exception.DepartmentNotFoundException;
+import com.capgemini.springboot.demo.exception.NotAuthorizedException;
 import com.capgemini.springboot.demo.model.Department;
+import com.capgemini.springboot.demo.model.Role;
 import com.capgemini.springboot.demo.repository.DepartmentRepository;
 
 @Service
@@ -20,16 +22,25 @@ public class DepartmentService implements IDepartmentService {
 	@Autowired
 	private DepartmentRepository departmentRepository;
 
+	@Autowired
+	private AppUserService appUserService;
+
 	@Override
 	public List<Department> getAllDepts() {
-		List<Department> depList = departmentRepository.findAll();
-		if (depList.isEmpty()) {
-			String exceptionMessage = "Departments don't exist in the database.";
-			LOG.warn(exceptionMessage);
-			throw new DepartmentNotFoundException(exceptionMessage);
+		if (appUserService.loggedInUser != null || appUserService.loggedInUser.getRole().equals(Role.ADMIN)) {
+			List<Department> depList = departmentRepository.findAll();
+			if (depList.isEmpty()) {
+				String exceptionMessage = "Departments don't exist in the database.";
+				LOG.warn(exceptionMessage);
+				throw new DepartmentNotFoundException(exceptionMessage);
+			} else {
+				LOG.info("depList returned successfully.");
+				return depList;
+			}
 		} else {
-			LOG.info("depList returned successfully.");
-			return depList;
+			String exceptionMessage = "You are not authorised to access this resource!";
+			LOG.warn(exceptionMessage);
+			throw new NotAuthorizedException(exceptionMessage);
 		}
 	}
 

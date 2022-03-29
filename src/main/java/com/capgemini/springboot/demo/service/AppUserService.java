@@ -41,7 +41,6 @@ public class AppUserService implements IAppUserService {
 		LOG.info(appUser.toString());
 		Optional<AppUser> userOptional = appUserRepository.findById(appUser.getUserName());
 		if (userOptional.isEmpty()) {
-			LOG.info(userOptional.get().toString());
 			return appUserRepository.save(appUser);
 		} else {
 			String exceptionMessage = "User with userName " + appUser.getUserName() + " already exists.";
@@ -51,13 +50,33 @@ public class AppUserService implements IAppUserService {
 
 	@Override
 	public AppUser loginUser(AppUser appUser) {
+		LOG.info(appUser.toString());
 		Optional<AppUser> userOptional = appUserRepository.findById(appUser.getUserName());
-		if (userOptional.isEmpty() || appUser.equals(userOptional.get())) {
-			LOG.info(userOptional.get().toString());
-			loggedInUser = appUser;
-			return appUser;
+		if (userOptional.isPresent()) {
+			if (appUser.equals(userOptional.get())) {
+				LOG.info(userOptional.get().toString());
+				loggedInUser = appUser;
+				return appUser;
+			} else {
+				String exceptionMessage = "Wrong password!";
+				LOG.warn(exceptionMessage);
+				throw new AppUserNotFoundException(exceptionMessage);
+			}
 		} else {
-			String exceptionMessage = "Wrong userName or password!";
+			String exceptionMessage = "Wrong userName!";
+			LOG.warn(exceptionMessage);
+			throw new AppUserNotFoundException(exceptionMessage);
+		}
+	}
+
+	@Override
+	public String logoutUser(String userName) {
+		if (loggedInUser.getUserName().equals(userName)) {
+
+			loggedInUser = null;
+			return userName;
+		} else {
+			String exceptionMessage = "User with userName " + userName + " is not logged in.";
 			LOG.warn(exceptionMessage);
 			throw new AppUserNotFoundException(exceptionMessage);
 		}
@@ -75,19 +94,4 @@ public class AppUserService implements IAppUserService {
 			throw new AppUserNotFoundException(exceptionMessage);
 		}
 	}
-
-	@Override
-	public AppUser deleteUser(String userName) {
-		Optional<AppUser> userOptional = appUserRepository.findById(userName);
-		if (userOptional.isPresent()) {
-			LOG.info(userOptional.get().toString());
-			appUserRepository.deleteById(userName);
-			return userOptional.get();
-		} else {
-			String exceptionMessage = "AppUser with userName " + userName + " not found!";
-			LOG.warn(exceptionMessage);
-			throw new AppUserNotFoundException(exceptionMessage);
-		}
-	}
-
 }

@@ -36,16 +36,23 @@ public class AppUserController implements IAppUserController {
 	}
 
 	@Override
-	@PostMapping("/add-user")
+	@PostMapping("/register")
 	public ResponseEntity<AppUser> register(@RequestBody AppUser appUser) {
 		LOG.info(appUser.toString());
 		return new ResponseEntity<AppUser>(appUserService.registerUser(appUser), HttpStatus.CREATED);
 	}
 
 	@Override
-	public ResponseEntity<AppUser> login(AppUser appUser) {
-		// TODO Auto-generated method stub
+	@PostMapping("/login")
+	public ResponseEntity<AppUser> login(@RequestBody AppUser appUser) {
+		LOG.info(appUser.toString());
 		return new ResponseEntity<AppUser>(appUserService.loginUser(appUser), HttpStatus.CREATED);
+	}
+
+	@Override
+	public ResponseEntity<String> logout(String userName) {
+		LOG.info(userName);
+		return new ResponseEntity<String>(appUserService.logoutUser(userName), HttpStatus.OK);
 	}
 
 	@Override
@@ -55,10 +62,4 @@ public class AppUserController implements IAppUserController {
 		return new ResponseEntity<AppUser>(appUserService.updateUser(appUser), HttpStatus.OK);
 	}
 
-	@Override
-	@DeleteMapping("/delete-user/{user}")
-	public ResponseEntity<AppUser> deleteAppUser(@PathVariable(name = "user") String userName) {
-		LOG.info(userName);
-		return new ResponseEntity<AppUser>(appUserService.deleteUser(userName), HttpStatus.OK);
-	}
 }

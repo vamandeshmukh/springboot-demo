@@ -14,8 +14,17 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
-	@ExceptionHandler(EmployeeNotFoundException.class)
-	public ResponseEntity<Object> handleEmployeeNotFoundException(EmployeeNotFoundException e) {
+	@ExceptionHandler(AppUserAlreadyExistsException.class)
+	public ResponseEntity<Object> handleAppUserAlreadyExistsException(AppUserAlreadyExistsException e) {
+		String exceptionMessage = e.getMessage();
+		LOG.info(exceptionMessage);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", exceptionMessage);
+		return new ResponseEntity<Object>(null, headers, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(AppUserNotFoundException.class)
+	public ResponseEntity<Object> handleAppUserNotFoundException(AppUserNotFoundException e) {
 		String exceptionMessage = e.getMessage();
 		LOG.info(exceptionMessage);
 		HttpHeaders headers = new HttpHeaders();
@@ -31,4 +40,23 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 		headers.add("message", exceptionMessage);
 		return new ResponseEntity<Object>(null, headers, HttpStatus.NOT_FOUND);
 	}
+
+	@ExceptionHandler(EmployeeNotFoundException.class)
+	public ResponseEntity<Object> handleEmployeeNotFoundException(EmployeeNotFoundException e) {
+		String exceptionMessage = e.getMessage();
+		LOG.info(exceptionMessage);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", exceptionMessage);
+		return new ResponseEntity<Object>(null, headers, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(NotAuthorizedException.class)
+	public ResponseEntity<Object> handleNotAuthorizedException(NotAuthorizedException e) {
+		String exceptionMessage = e.getMessage();
+		LOG.info(exceptionMessage);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", exceptionMessage);
+		return new ResponseEntity<Object>(null, headers, HttpStatus.FORBIDDEN);
+	}
+
 }

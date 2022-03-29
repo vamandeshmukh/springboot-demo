@@ -12,8 +12,8 @@ public interface IAppUserService {
 
 	public abstract AppUser loginUser(AppUser appUser);
 
-	public abstract AppUser updateUser(AppUser appUser);
+	public abstract String logoutUser(String userName);
 
-	public abstract AppUser deleteUser(String userName);
+	public abstract AppUser updateUser(AppUser appUser);
 
 }

@@ -27,18 +27,24 @@ public class DepartmentService implements IDepartmentService {
 
 	@Override
 	public List<Department> getAllDepts() {
-		if (appUserService.loggedInUser != null || appUserService.loggedInUser.getRole().equals(Role.ADMIN)) {
-			List<Department> depList = departmentRepository.findAll();
-			if (depList.isEmpty()) {
-				String exceptionMessage = "Departments don't exist in the database.";
-				LOG.warn(exceptionMessage);
-				throw new DepartmentNotFoundException(exceptionMessage);
+		if (appUserService.loggedInUser != null) {
+			if (appUserService.loggedInUser.getRole().equals(Role.ADMIN)) {
+				List<Department> depList = departmentRepository.findAll();
+				if (depList.isEmpty()) {
+					String exceptionMessage = "Departments don't exist in the database.";
+					LOG.warn(exceptionMessage);
+					throw new DepartmentNotFoundException(exceptionMessage);
+				} else {
+					LOG.info("depList returned successfully.");
+					return depList;
+				}
 			} else {
-				LOG.info("depList returned successfully.");
-				return depList;
+				String exceptionMessage = "You are not authorised to access this resource!";
+				LOG.warn(exceptionMessage);
+				throw new NotAuthorizedException(exceptionMessage);
 			}
 		} else {
-			String exceptionMessage = "You are not authorised to access this resource!";
+			String exceptionMessage = "You are not logged in.";
 			LOG.warn(exceptionMessage);
 			throw new NotAuthorizedException(exceptionMessage);
 		}

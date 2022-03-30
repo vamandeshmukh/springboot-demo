@@ -55,7 +55,7 @@ public class AppUserService implements IAppUserService {
 		if (userOptional.isPresent()) {
 			if (appUser.equals(userOptional.get())) {
 				LOG.info(userOptional.get().toString());
-				loggedInUser = appUser;
+				loggedInUser = appUser; // successful login
 				return appUser;
 			} else {
 				String exceptionMessage = "Wrong password!";

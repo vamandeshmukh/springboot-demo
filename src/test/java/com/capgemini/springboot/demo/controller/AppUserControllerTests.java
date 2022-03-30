@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.capgemini.springboot.demo.model.AppUser;
 import com.capgemini.springboot.demo.model.Role;
@@ -19,10 +22,11 @@ public class AppUserControllerTests {
 
 	Logger LOG = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private AppUserService appUserService;
-
+//	private static ResponseEntity<AppUser> appUserResponse;
 	private static AppUser appUser;
+
+	@Autowired
+	AppUserController appUserController;
 
 	@BeforeAll
 	public static void setUp() {
@@ -31,19 +35,20 @@ public class AppUserControllerTests {
 	}
 
 	@Test
-	public void testLogin() {
-		LOG.info(appUser.toString());
-		AppUser expected = appUser;
-		AppUser actual = appUserService.loginUser(appUser);
+	public void testLoginHttpStatus() {
+		HttpStatus expected = HttpStatus.OK;
+		HttpStatus actual = appUserController.login(appUser).getStatusCode();
+		LOG.info(expected.toString());
+		LOG.info(actual.toString());
 		assertEquals(expected, actual);
 	}
 
-//	@Disabled
 	@Test
-	public void testLoginFailure() {
-		LOG.info(appUser.toString());
-		AppUser unexpected = appUser;
-		AppUser actual = appUserService.loginUser(new AppUser("Sonu", "Sonu", Role.EMPLOYEE));
-		assertNotEquals(unexpected, actual);
+	public void testLoginHeaders() {
+		String expected = "abcd";
+		String actual = appUserController.login(appUser).getHeaders().get("message").toString();
+		LOG.info(expected.toString());
+		LOG.info(actual.toString());
+		assertEquals(expected, actual);
 	}
 }

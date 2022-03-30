@@ -45,7 +45,7 @@ public class AppUserController implements IAppUserController {
 	@PostMapping("/login")
 	public ResponseEntity<AppUser> login(@RequestBody AppUser appUser) {
 		LOG.info(appUser.toString());
-		return new ResponseEntity<AppUser>(appUserService.loginUser(appUser), HttpStatus.CREATED);
+		return new ResponseEntity<AppUser>(appUserService.loginUser(appUser), HttpStatus.OK);
 	}
 
 	@Override

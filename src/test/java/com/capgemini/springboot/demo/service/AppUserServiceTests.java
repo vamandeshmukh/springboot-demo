@@ -3,6 +3,7 @@ package com.capgemini.springboot.demo.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -26,7 +27,11 @@ public class AppUserServiceTests {
 	@BeforeAll
 	public static void setUp() {
 		appUser = new AppUser("vaman", "vaman", Role.ADMIN);
+	}
 
+	@AfterAll
+	public static void tearDown() {
+		appUser = null;
 	}
 
 	@Test

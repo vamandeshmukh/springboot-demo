@@ -6,15 +6,12 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import com.capgemini.springboot.demo.model.AppUser;
 import com.capgemini.springboot.demo.model.Role;
@@ -45,9 +42,11 @@ public class AppUserControllerMockTests {
 
 	@Test
 	public void testLoginHttpStatus() {
-		when(appUserService.loginUser(appUser)).thenReturn(appUser);
+		when(appUserService.loginUser(appUser)).thenReturn(appUser); // returns the mock AppUser object
+
 		HttpStatus expected = HttpStatus.OK;
 		HttpStatus actual = appUserController.login(appUser).getStatusCode();
+
 		assertEquals(expected, actual);
 	}
 

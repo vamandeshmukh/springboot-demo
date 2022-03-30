@@ -4,16 +4,37 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
-@Table(name = "app_user")
+@Table(name = "app_users") // table-name changed
 public class AppUser {
 
 	@Id
 	@Column(name = "user_name")
+	@NotBlank
+	@Min(4)
+	@Max(32)
 	private String userName;
 
+//	password validation 
+//	^                 # start-of-string
+//	(?=.*[0-9])       # a digit must occur at least once
+//	(?=.*[a-z])       # a lower case letter must occur at least once
+//	(?=.*[A-Z])       # an upper case letter must occur at least once
+//	(?=.*[@#$%^&+=])  # a special character must occur at least once
+//	(?=\S+$)          # no whitespace allowed in the entire string
+//	.{8,}             # anything, at least eight places though
+//	$                 # end-of-string
+
 	@Column(name = "password")
+	@NotBlank
+	@Min(4)
+	@Max(32)
+	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
 	private String password;
 
 	@Column(name = "role")
